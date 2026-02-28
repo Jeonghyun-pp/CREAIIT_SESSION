@@ -19,7 +19,7 @@ export function SessionCard({ id, title, date, summary, goalCount }: SessionCard
   return (
     <Link
       href={`/sessions/${id}`}
-      className="group block rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-blue-200 hover:shadow-md"
+      className="group block rounded-xl border border-gray-200 bg-white p-6 transition-all hover:border-blue-200 hover:shadow-sm"
     >
       <div className="mb-3 flex items-center gap-2">
         <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">

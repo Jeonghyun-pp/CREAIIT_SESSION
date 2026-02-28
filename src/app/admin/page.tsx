@@ -37,7 +37,7 @@ function DashboardCard({
   return (
     <Link
       href={href}
-      className="rounded-xl border border-gray-200 bg-white p-6 transition-shadow hover:shadow-md"
+      className="rounded-xl border border-gray-200 bg-white p-6 transition-shadow hover:shadow-sm"
     >
       <h2 className="mb-2 text-lg font-semibold text-slate-800">{title}</h2>
       <p className="text-sm text-slate-500">{description}</p>

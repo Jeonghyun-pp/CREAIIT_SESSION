@@ -1,25 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #1a1d2e;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --muted: #6b7280;
-  --border: #e5e7eb;
+  --background: #F7FAFD;
+  --foreground: #10151A;
+  --accent: #4058FF;
+  --accent-hover: #3348D9;
+  --muted: #4B5966;
+  --border: #E2E8F0;
   --card: #ffffff;
-  --card-hover: #f7f8fa;
+  --card-hover: #F0F4F8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", sans-serif;
+
+  /* Liner #4058FF 기반 blue 팔레트 재정의 */
+  --color-blue-50: #EEF0FF;
+  --color-blue-100: #DDE2FF;
+  --color-blue-200: #BBC5FF;
+  --color-blue-300: #8896FF;
+  --color-blue-400: #5A6BFF;
+  --color-blue-500: #4058FF;
+  --color-blue-600: #4058FF;
+  --color-blue-700: #3348D9;
+  --color-blue-800: #2A3AB3;
+  --color-blue-900: #1F2B8C;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
+    Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", sans-serif;
 }

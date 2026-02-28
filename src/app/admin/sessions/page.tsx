@@ -12,7 +12,7 @@ export default async function AdminSessionsPage() {
   });
 
   return (
-    <div className="mx-auto max-w-4xl">
+    <div className="mx-auto max-w-5xl">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold text-slate-800">세션 관리</h1>
         <div className="flex gap-2">
@@ -34,31 +34,31 @@ export default async function AdminSessionsPage() {
       {sessions.length === 0 ? (
         <p className="text-slate-400">세션이 없습니다.</p>
       ) : (
-        <div className="overflow-hidden rounded-xl border border-gray-200">
+        <div className="overflow-x-auto rounded-xl border border-gray-200">
           <table className="w-full text-left text-sm">
             <thead className="border-b border-gray-200 bg-gray-50">
               <tr>
                 <th className="px-4 py-3 font-medium text-slate-600">제목</th>
-                <th className="px-4 py-3 font-medium text-slate-600">날짜</th>
-                <th className="px-4 py-3 font-medium text-slate-600">상태</th>
-                <th className="px-4 py-3 font-medium text-slate-600">블록</th>
-                <th className="px-4 py-3 font-medium text-slate-600">자료</th>
-                <th className="px-4 py-3 font-medium text-slate-600">제출</th>
-                <th className="px-4 py-3 font-medium text-slate-600"></th>
+                <th className="whitespace-nowrap px-3 py-3 font-medium text-slate-600">날짜</th>
+                <th className="whitespace-nowrap px-3 py-3 text-center font-medium text-slate-600">상태</th>
+                <th className="whitespace-nowrap px-3 py-3 text-center font-medium text-slate-600">블록</th>
+                <th className="whitespace-nowrap px-3 py-3 text-center font-medium text-slate-600">자료</th>
+                <th className="whitespace-nowrap px-3 py-3 text-center font-medium text-slate-600">제출</th>
+                <th className="w-16 px-3 py-3"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {sessions.map((s) => (
                 <tr key={s.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 font-medium text-slate-800">
+                  <td className="max-w-xs truncate px-4 py-3 font-medium text-slate-800">
                     {s.title}
                   </td>
-                  <td className="px-4 py-3 text-slate-500">
+                  <td className="whitespace-nowrap px-3 py-3 text-slate-500">
                     {s.date.toLocaleDateString("ko-KR")}
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="whitespace-nowrap px-3 py-3 text-center">
                     <span
-                      className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                      className={`inline-block rounded-full px-2 py-0.5 text-xs font-medium ${
                         s.published
                           ? "bg-green-50 text-green-700"
                           : "bg-gray-100 text-gray-500"
@@ -67,10 +67,10 @@ export default async function AdminSessionsPage() {
                       {s.published ? "공개" : "비공개"}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-slate-500">{s._count.blocks}</td>
-                  <td className="px-4 py-3 text-slate-500">{s._count.assets}</td>
-                  <td className="px-4 py-3 text-slate-500">{s._count.submissions}</td>
-                  <td className="px-4 py-3">
+                  <td className="whitespace-nowrap px-3 py-3 text-center text-slate-500">{s._count.blocks}</td>
+                  <td className="whitespace-nowrap px-3 py-3 text-center text-slate-500">{s._count.assets}</td>
+                  <td className="whitespace-nowrap px-3 py-3 text-center text-slate-500">{s._count.submissions}</td>
+                  <td className="whitespace-nowrap px-3 py-3 text-center">
                     <Link
                       href={`/admin/sessions/${s.id}/edit`}
                       className="text-blue-600 hover:text-blue-800"

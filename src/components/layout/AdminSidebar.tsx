@@ -15,7 +15,7 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="flex w-56 flex-col border-r border-gray-200 bg-slate-50">
+    <aside className="flex w-56 flex-col border-r border-gray-100 bg-[#F0F4F8]">
       <div className="border-b border-gray-200 px-4 py-3">
         <Link href="/admin" className="text-sm font-bold text-slate-800">
           관리자 패널
