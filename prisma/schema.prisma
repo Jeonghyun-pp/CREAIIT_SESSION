@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  REJECTED
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  name         String
+  passwordHash String
+  role         Role       @default(MEMBER)
+  status       UserStatus @default(PENDING)
+  createdAt    DateTime   @default(now())
+
+  submissions Submission[]
+}
+
+model Session {
+  id            String         @id @default(cuid())
+  title         String
+  date          DateTime
+  summary       String
+  goals         String[]
+  prerequisites String[]
+  published     Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  blocks      SessionBlock[]
+  assets      Asset[]
+  submissions Submission[]
+}
+
+enum BlockType {
+  FLOW
+  TIMELINE
+}
+
+model SessionBlock {
+  id          String    @id @default(cuid())
+  sessionId   String
+  session     Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  order       Int
+  type        BlockType
+  title       String
+  description String?
+  startTime   String?
+  endTime     String?
+  createdAt   DateTime  @default(now())
+
+  @@index([sessionId, order])
+}
+
+enum AssetKind {
+  SESSION_SLIDE
+  LAB_SLIDE
+  CODE
+  ETC
+}
+
+model Asset {
+  id            String    @id @default(cuid())
+  sessionId     String
+  session       Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  kind          AssetKind
+  title         String
+  description   String?
+  fileName      String
+  mimeType      String
+  size          Int
+  storageKey    String    @unique
+  downloadCount Int       @default(0)
+  createdAt     DateTime  @default(now())
+
+  submissions Submission[] @relation("SubmissionFile")
+}
+
+enum SubmissionStatus {
+  SUBMITTED
+  REVIEWED
+}
+
+model Submission {
+  id             String           @id @default(cuid())
+  sessionId      String
+  session        Session          @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  userId         String?
+  user           User?            @relation(fields: [userId], references: [id])
+  submitterName  String?
+  submitterEmail String?
+  githubUrl      String?
+  fileAssetId    String?
+  fileAsset      Asset?           @relation("SubmissionFile", fields: [fileAssetId], references: [id])
+  message        String?
+  ipHash         String
+  status         SubmissionStatus @default(SUBMITTED)
+  createdAt      DateTime         @default(now())
+
+  @@index([sessionId, createdAt])
+  @@index([ipHash, sessionId])
+  @@index([userId])
+}

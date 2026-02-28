@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "WebSearch",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(mv .claude:*)",
+      "Bash(cp:*)",
+      "Bash(npm install:*)",
+      "Bash(npx prisma:*)",
+      "Bash(docker compose:*)",
+      "Bash(npx tsc:*)",
+      "Bash(ls:*)",
+      "Bash(npx next:*)",
+      "Bash(find:*)",
+      "Bash(npm run:*)",
+      "Bash(curl:*)",
+      "Bash(npm ls:*)",
+      "Bash(xargs cat:*)",
+      "Bash(test:*)",
+      "Bash(node:*)"
+    ]
+  }
+}
