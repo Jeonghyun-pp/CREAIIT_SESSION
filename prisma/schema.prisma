@@ -27,7 +27,8 @@ model User {
   status       UserStatus @default(PENDING)
   createdAt    DateTime   @default(now())
 
-  submissions Submission[]
+  submissions       Submission[]
+  presentedSessions Session[]    @relation("SessionPresenter")
 }
 
 model Session {
@@ -37,6 +38,8 @@ model Session {
   summary       String
   goals         String[]
   prerequisites String[]
+  presenterId   String?
+  presenter     User?          @relation("SessionPresenter", fields: [presenterId], references: [id])
   published     Boolean        @default(false)
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt

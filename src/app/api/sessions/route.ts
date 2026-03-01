@@ -11,6 +11,7 @@ export async function GET() {
       where: { published: true },
       orderBy: { date: "asc" },
       include: {
+        presenter: { select: { id: true, name: true } },
         _count: { select: { blocks: true, assets: true } },
       },
     });

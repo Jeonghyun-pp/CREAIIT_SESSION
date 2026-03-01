@@ -6,9 +6,10 @@ interface SessionCardProps {
   date: string;
   summary: string;
   goalCount: number;
+  presenterName?: string;
 }
 
-export function SessionCard({ id, title, date, summary, goalCount }: SessionCardProps) {
+export function SessionCard({ id, title, date, summary, goalCount, presenterName }: SessionCardProps) {
   const formattedDate = new Date(date).toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
@@ -28,6 +29,11 @@ export function SessionCard({ id, title, date, summary, goalCount }: SessionCard
         <span className="inline-block rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-500">
           목표 {goalCount}개
         </span>
+        {presenterName && (
+          <span className="inline-block rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700">
+            {presenterName}
+          </span>
+        )}
       </div>
       <h2 className="mb-2 text-lg font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
         {title}

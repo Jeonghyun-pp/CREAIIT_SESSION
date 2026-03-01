@@ -18,6 +18,7 @@ export default async function SessionDetailPage({ params }: Props) {
   const session = await prisma.session.findUnique({
     where: { id: sessionId },
     include: {
+      presenter: { select: { id: true, name: true } },
       blocks: { orderBy: { order: "asc" } },
       assets: { orderBy: { createdAt: "desc" } },
     },
@@ -43,9 +44,16 @@ export default async function SessionDetailPage({ params }: Props) {
 
       {/* Header */}
       <div className="mb-8">
-        <span className="mb-2 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
-          {formattedDate}
-        </span>
+        <div className="mb-2 flex items-center gap-2">
+          <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+            {formattedDate}
+          </span>
+          {session.presenter && (
+            <span className="inline-block rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700">
+              {session.presenter.name}
+            </span>
+          )}
+        </div>
         <h1 className="text-2xl font-bold text-slate-800">{session.title}</h1>
       </div>
 

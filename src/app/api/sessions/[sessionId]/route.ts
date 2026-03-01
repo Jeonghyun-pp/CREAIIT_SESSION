@@ -13,6 +13,7 @@ export async function GET(_req: NextRequest, { params }: Params) {
     const session = await prisma.session.findUnique({
       where: { id: sessionId },
       include: {
+        presenter: { select: { id: true, name: true } },
         blocks: { orderBy: { order: "asc" } },
         assets: { orderBy: { createdAt: "desc" } },
       },
@@ -39,11 +40,12 @@ export async function PUT(req: NextRequest, { params }: Params) {
       throw new AppError("VALIDATION", parsed.error.issues[0].message);
     }
 
-    const { blocks, date, ...rest } = parsed.data;
+    const { blocks, date, presenterId, ...rest } = parsed.data;
 
     // Update session fields
     const updateData: Record<string, unknown> = { ...rest };
     if (date) updateData.date = new Date(date);
+    if (presenterId !== undefined) updateData.presenterId = presenterId || null;
 
     const session = await prisma.session.update({
       where: { id: sessionId },
@@ -68,7 +70,10 @@ export async function PUT(req: NextRequest, { params }: Params) {
 
     const updated = await prisma.session.findUnique({
       where: { id: sessionId },
-      include: { blocks: { orderBy: { order: "asc" } } },
+      include: {
+        presenter: { select: { id: true, name: true } },
+        blocks: { orderBy: { order: "asc" } },
+      },
     });
 
     return successResponse(updated);

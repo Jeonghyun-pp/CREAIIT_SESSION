@@ -7,6 +7,7 @@ export default async function HomePage() {
   const sessions = await prisma.session.findMany({
     where: { published: true },
     orderBy: { date: "asc" },
+    include: { presenter: { select: { id: true, name: true } } },
   });
 
   return (
@@ -32,6 +33,7 @@ export default async function HomePage() {
               date={s.date.toISOString()}
               summary={s.summary}
               goalCount={s.goals.length}
+              presenterName={s.presenter?.name}
             />
           ))}
         </div>

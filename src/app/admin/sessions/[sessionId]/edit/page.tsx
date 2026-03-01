@@ -30,6 +30,8 @@ export default function EditSessionPage() {
   const [goals, setGoals] = useState<string[]>([""]);
   const [prerequisites, setPrerequisites] = useState<string[]>([""]);
   const [published, setPublished] = useState(false);
+  const [presenterId, setPresenterId] = useState<string>("");
+  const [presenters, setPresenters] = useState<{ id: string; name: string; email: string }[]>([]);
   const [blocks, setBlocks] = useState<BlockInput[]>([]);
 
   const loadSession = useCallback(async () => {
@@ -44,6 +46,7 @@ export default function EditSessionPage() {
       setGoals(s.goals?.length ? s.goals : [""]);
       setPrerequisites(s.prerequisites?.length ? s.prerequisites : [""]);
       setPublished(s.published);
+      setPresenterId(s.presenterId || "");
       // 기존 FLOW 블록은 TIMELINE으로 통합 (시간 없이)
       setBlocks(
         (s.blocks || [])
@@ -67,6 +70,15 @@ export default function EditSessionPage() {
   useEffect(() => {
     loadSession();
   }, [loadSession]);
+
+  useEffect(() => {
+    fetch("/api/admin/presenters")
+      .then((r) => r.json())
+      .then((json) => {
+        if (json.ok) setPresenters(json.data);
+      })
+      .catch(() => {});
+  }, []);
 
   function addGoal() {
     setGoals([...goals, ""]);
@@ -159,6 +171,7 @@ export default function EditSessionPage() {
           goals: goals.filter((g) => g.trim()),
           prerequisites: prerequisites.filter((p) => p.trim()),
           published,
+          presenterId: presenterId || null,
           blocks: blocks.map((b, i) => ({ ...b, order: i })),
         }),
       });
@@ -213,7 +226,7 @@ export default function EditSessionPage() {
         {/* Basic info */}
         <div className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
           <h2 className="font-semibold text-slate-800">기본 정보</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div>
               <label className="mb-1 block text-sm font-medium text-slate-700">제목 *</label>
               <input
@@ -232,6 +245,19 @@ export default function EditSessionPage() {
                 onChange={(e) => setDate(e.target.value)}
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
               />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700">발제자</label>
+              <select
+                value={presenterId}
+                onChange={(e) => setPresenterId(e.target.value)}
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              >
+                <option value="">선택 안함</option>
+                {presenters.map((p) => (
+                  <option key={p.id} value={p.id}>{p.name}</option>
+                ))}
+              </select>
             </div>
           </div>
           <div>

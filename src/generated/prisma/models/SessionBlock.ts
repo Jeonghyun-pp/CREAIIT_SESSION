@@ -503,10 +503,6 @@ export type EnumBlockTypeFieldUpdateOperationsInput = {
   set?: $Enums.BlockType
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type SessionBlockCreateWithoutSessionInput = {
   id?: string
   order: number

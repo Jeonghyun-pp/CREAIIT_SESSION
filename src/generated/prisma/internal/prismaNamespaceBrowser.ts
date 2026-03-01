@@ -94,6 +94,7 @@ export const SessionScalarFieldEnum = {
   summary: 'summary',
   goals: 'goals',
   prerequisites: 'prerequisites',
+  presenterId: 'presenterId',
   published: 'published',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
