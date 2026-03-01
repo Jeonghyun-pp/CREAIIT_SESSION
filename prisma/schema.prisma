@@ -38,6 +38,7 @@ model Session {
   summary       String
   goals         String[]
   prerequisites String[]
+  location      String?
   presenterId   String?
   presenter     User?          @relation("SessionPresenter", fields: [presenterId], references: [id])
   published     Boolean        @default(false)

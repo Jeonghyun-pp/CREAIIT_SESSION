@@ -14,7 +14,7 @@ export default async function HomePage() {
     <div className="mx-auto max-w-5xl px-4 py-12">
       <div className="mb-10 text-center">
         <h1 className="mb-3 text-3xl font-bold text-slate-800">
-          CREA+IT 세션
+          CREAI+IT 세션
         </h1>
         <p className="text-slate-500">
           연세대학교 AI 창업학회의 세션 자료와 과제를 확인하세요.
@@ -34,6 +34,7 @@ export default async function HomePage() {
               summary={s.summary}
               goalCount={s.goals.length}
               presenterName={s.presenter?.name}
+              location={s.location ?? undefined}
             />
           ))}
         </div>

@@ -17,6 +17,7 @@ export const createSessionSchema = z.object({
   goals: z.array(z.string()).min(1, "목표를 최소 1개 입력해주세요"),
   prerequisites: z.array(z.string()).default([]),
   published: z.boolean().default(false),
+  location: z.string().nullable().optional(),
   presenterId: z.string().nullable().optional(),
   blocks: z.array(blockSchema).default([]),
 });

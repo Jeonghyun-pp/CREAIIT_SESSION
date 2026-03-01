@@ -16,7 +16,7 @@ export function TopNav() {
     <header className="sticky top-0 z-50 border-b border-gray-100 bg-white/80 backdrop-blur-sm">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
         <Link href="/" className="text-lg font-bold text-slate-800">
-          CREA+IT
+          CREAI+IT
         </Link>
         <nav className="flex items-center gap-6">
           {links.map(({ href, label }) => {

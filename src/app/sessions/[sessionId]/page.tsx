@@ -53,6 +53,11 @@ export default async function SessionDetailPage({ params }: Props) {
               {session.presenter.name}
             </span>
           )}
+          {session.location && (
+            <span className="inline-block rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">
+              {session.location}
+            </span>
+          )}
         </div>
         <h1 className="text-2xl font-bold text-slate-800">{session.title}</h1>
       </div>

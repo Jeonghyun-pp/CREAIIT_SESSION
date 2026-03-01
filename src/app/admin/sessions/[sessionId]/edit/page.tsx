@@ -30,6 +30,7 @@ export default function EditSessionPage() {
   const [goals, setGoals] = useState<string[]>([""]);
   const [prerequisites, setPrerequisites] = useState<string[]>([""]);
   const [published, setPublished] = useState(false);
+  const [location, setLocation] = useState("");
   const [presenterId, setPresenterId] = useState<string>("");
   const [presenters, setPresenters] = useState<{ id: string; name: string; email: string }[]>([]);
   const [blocks, setBlocks] = useState<BlockInput[]>([]);
@@ -46,6 +47,7 @@ export default function EditSessionPage() {
       setGoals(s.goals?.length ? s.goals : [""]);
       setPrerequisites(s.prerequisites?.length ? s.prerequisites : [""]);
       setPublished(s.published);
+      setLocation(s.location || "");
       setPresenterId(s.presenterId || "");
       // 기존 FLOW 블록은 TIMELINE으로 통합 (시간 없이)
       setBlocks(
@@ -171,6 +173,7 @@ export default function EditSessionPage() {
           goals: goals.filter((g) => g.trim()),
           prerequisites: prerequisites.filter((p) => p.trim()),
           published,
+          location: location || null,
           presenterId: presenterId || null,
           blocks: blocks.map((b, i) => ({ ...b, order: i })),
         }),
@@ -226,7 +229,7 @@ export default function EditSessionPage() {
         {/* Basic info */}
         <div className="rounded-xl border border-gray-200 bg-white p-6 space-y-4">
           <h2 className="font-semibold text-slate-800">기본 정보</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="mb-1 block text-sm font-medium text-slate-700">제목 *</label>
               <input
@@ -258,6 +261,15 @@ export default function EditSessionPage() {
                   <option key={p.id} value={p.id}>{p.name}</option>
                 ))}
               </select>
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700">장소</label>
+              <input
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                placeholder="예: 공학원 B051"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+              />
             </div>
           </div>
           <div>

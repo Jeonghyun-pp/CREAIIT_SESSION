@@ -4,8 +4,8 @@ import { AuthProvider } from "@/components/providers/AuthProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CREA+IT Sessions",
-  description: "연세대학교 AI 창업학회 CREA+IT 세션 관리",
+  title: "CREAI+IT Sessions",
+  description: "연세대학교 AI 창업학회 CREAI+IT 세션 관리",
 };
 
 export default function RootLayout({

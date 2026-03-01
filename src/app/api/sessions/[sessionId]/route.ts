@@ -40,11 +40,12 @@ export async function PUT(req: NextRequest, { params }: Params) {
       throw new AppError("VALIDATION", parsed.error.issues[0].message);
     }
 
-    const { blocks, date, presenterId, ...rest } = parsed.data;
+    const { blocks, date, presenterId, location, ...rest } = parsed.data;
 
     // Update session fields
     const updateData: Record<string, unknown> = { ...rest };
     if (date) updateData.date = new Date(date);
+    if (location !== undefined) updateData.location = location || null;
     if (presenterId !== undefined) updateData.presenterId = presenterId || null;
 
     const session = await prisma.session.update({

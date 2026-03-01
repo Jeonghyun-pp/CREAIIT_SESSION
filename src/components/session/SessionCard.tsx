@@ -7,9 +7,10 @@ interface SessionCardProps {
   summary: string;
   goalCount: number;
   presenterName?: string;
+  location?: string;
 }
 
-export function SessionCard({ id, title, date, summary, goalCount, presenterName }: SessionCardProps) {
+export function SessionCard({ id, title, date, summary, goalCount, presenterName, location }: SessionCardProps) {
   const formattedDate = new Date(date).toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
@@ -32,6 +33,11 @@ export function SessionCard({ id, title, date, summary, goalCount, presenterName
         {presenterName && (
           <span className="inline-block rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700">
             {presenterName}
+          </span>
+        )}
+        {location && (
+          <span className="inline-block rounded-full bg-amber-50 px-2 py-1 text-xs font-medium text-amber-700">
+            {location}
           </span>
         )}
       </div>
