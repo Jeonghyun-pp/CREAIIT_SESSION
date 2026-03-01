@@ -44,17 +44,17 @@ export default async function SessionDetailPage({ params }: Props) {
 
       {/* Header */}
       <div className="mb-8">
-        <div className="mb-2 flex items-center gap-2">
-          <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+        <div className="mb-2 flex flex-wrap items-center gap-2">
+          <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
             {formattedDate}
           </span>
           {session.presenter && (
-            <span className="inline-block rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700">
+            <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700">
               {session.presenter.name}
             </span>
           )}
           {session.location && (
-            <span className="inline-block rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">
+            <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700">
               {session.location}
             </span>
           )}
