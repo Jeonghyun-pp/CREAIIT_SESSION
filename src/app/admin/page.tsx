@@ -20,6 +20,11 @@ export default function AdminDashboard() {
           title="제출물 조회"
           description="학생들의 과제 제출물을 확인합니다"
         />
+        <DashboardCard
+          href="/admin/attendance"
+          title="출석 관리"
+          description="세션별 회원 출석 현황을 관리합니다"
+        />
       </div>
     </div>
   );

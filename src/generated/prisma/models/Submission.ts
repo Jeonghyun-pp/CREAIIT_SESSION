@@ -27,7 +27,6 @@ export type AggregateSubmission = {
 export type SubmissionMinAggregateOutputType = {
   id: string | null
   sessionId: string | null
-  userId: string | null
   submitterName: string | null
   submitterEmail: string | null
   githubUrl: string | null
@@ -36,12 +35,13 @@ export type SubmissionMinAggregateOutputType = {
   ipHash: string | null
   status: $Enums.SubmissionStatus | null
   createdAt: Date | null
+  userId: string | null
+  feedback: string | null
 }
 
 export type SubmissionMaxAggregateOutputType = {
   id: string | null
   sessionId: string | null
-  userId: string | null
   submitterName: string | null
   submitterEmail: string | null
   githubUrl: string | null
@@ -50,12 +50,13 @@ export type SubmissionMaxAggregateOutputType = {
   ipHash: string | null
   status: $Enums.SubmissionStatus | null
   createdAt: Date | null
+  userId: string | null
+  feedback: string | null
 }
 
 export type SubmissionCountAggregateOutputType = {
   id: number
   sessionId: number
-  userId: number
   submitterName: number
   submitterEmail: number
   githubUrl: number
@@ -64,6 +65,8 @@ export type SubmissionCountAggregateOutputType = {
   ipHash: number
   status: number
   createdAt: number
+  userId: number
+  feedback: number
   _all: number
 }
 
@@ -71,7 +74,6 @@ export type SubmissionCountAggregateOutputType = {
 export type SubmissionMinAggregateInputType = {
   id?: true
   sessionId?: true
-  userId?: true
   submitterName?: true
   submitterEmail?: true
   githubUrl?: true
@@ -80,12 +82,13 @@ export type SubmissionMinAggregateInputType = {
   ipHash?: true
   status?: true
   createdAt?: true
+  userId?: true
+  feedback?: true
 }
 
 export type SubmissionMaxAggregateInputType = {
   id?: true
   sessionId?: true
-  userId?: true
   submitterName?: true
   submitterEmail?: true
   githubUrl?: true
@@ -94,12 +97,13 @@ export type SubmissionMaxAggregateInputType = {
   ipHash?: true
   status?: true
   createdAt?: true
+  userId?: true
+  feedback?: true
 }
 
 export type SubmissionCountAggregateInputType = {
   id?: true
   sessionId?: true
-  userId?: true
   submitterName?: true
   submitterEmail?: true
   githubUrl?: true
@@ -108,6 +112,8 @@ export type SubmissionCountAggregateInputType = {
   ipHash?: true
   status?: true
   createdAt?: true
+  userId?: true
+  feedback?: true
   _all?: true
 }
 
@@ -186,7 +192,6 @@ export type SubmissionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type SubmissionGroupByOutputType = {
   id: string
   sessionId: string
-  userId: string | null
   submitterName: string | null
   submitterEmail: string | null
   githubUrl: string | null
@@ -195,6 +200,8 @@ export type SubmissionGroupByOutputType = {
   ipHash: string
   status: $Enums.SubmissionStatus
   createdAt: Date
+  userId: string | null
+  feedback: string | null
   _count: SubmissionCountAggregateOutputType | null
   _min: SubmissionMinAggregateOutputType | null
   _max: SubmissionMaxAggregateOutputType | null
@@ -221,7 +228,6 @@ export type SubmissionWhereInput = {
   NOT?: Prisma.SubmissionWhereInput | Prisma.SubmissionWhereInput[]
   id?: Prisma.StringFilter<"Submission"> | string
   sessionId?: Prisma.StringFilter<"Submission"> | string
-  userId?: Prisma.StringNullableFilter<"Submission"> | string | null
   submitterName?: Prisma.StringNullableFilter<"Submission"> | string | null
   submitterEmail?: Prisma.StringNullableFilter<"Submission"> | string | null
   githubUrl?: Prisma.StringNullableFilter<"Submission"> | string | null
@@ -230,15 +236,16 @@ export type SubmissionWhereInput = {
   ipHash?: Prisma.StringFilter<"Submission"> | string
   status?: Prisma.EnumSubmissionStatusFilter<"Submission"> | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFilter<"Submission"> | Date | string
+  userId?: Prisma.StringNullableFilter<"Submission"> | string | null
+  feedback?: Prisma.StringNullableFilter<"Submission"> | string | null
+  fileAsset?: Prisma.XOR<Prisma.AssetNullableScalarRelationFilter, Prisma.AssetWhereInput> | null
   session?: Prisma.XOR<Prisma.SessionScalarRelationFilter, Prisma.SessionWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  fileAsset?: Prisma.XOR<Prisma.AssetNullableScalarRelationFilter, Prisma.AssetWhereInput> | null
 }
 
 export type SubmissionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   submitterName?: Prisma.SortOrderInput | Prisma.SortOrder
   submitterEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   githubUrl?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -247,9 +254,11 @@ export type SubmissionOrderByWithRelationInput = {
   ipHash?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  feedback?: Prisma.SortOrderInput | Prisma.SortOrder
+  fileAsset?: Prisma.AssetOrderByWithRelationInput
   session?: Prisma.SessionOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
-  fileAsset?: Prisma.AssetOrderByWithRelationInput
 }
 
 export type SubmissionWhereUniqueInput = Prisma.AtLeast<{
@@ -258,7 +267,6 @@ export type SubmissionWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.SubmissionWhereInput[]
   NOT?: Prisma.SubmissionWhereInput | Prisma.SubmissionWhereInput[]
   sessionId?: Prisma.StringFilter<"Submission"> | string
-  userId?: Prisma.StringNullableFilter<"Submission"> | string | null
   submitterName?: Prisma.StringNullableFilter<"Submission"> | string | null
   submitterEmail?: Prisma.StringNullableFilter<"Submission"> | string | null
   githubUrl?: Prisma.StringNullableFilter<"Submission"> | string | null
@@ -267,15 +275,16 @@ export type SubmissionWhereUniqueInput = Prisma.AtLeast<{
   ipHash?: Prisma.StringFilter<"Submission"> | string
   status?: Prisma.EnumSubmissionStatusFilter<"Submission"> | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFilter<"Submission"> | Date | string
+  userId?: Prisma.StringNullableFilter<"Submission"> | string | null
+  feedback?: Prisma.StringNullableFilter<"Submission"> | string | null
+  fileAsset?: Prisma.XOR<Prisma.AssetNullableScalarRelationFilter, Prisma.AssetWhereInput> | null
   session?: Prisma.XOR<Prisma.SessionScalarRelationFilter, Prisma.SessionWhereInput>
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  fileAsset?: Prisma.XOR<Prisma.AssetNullableScalarRelationFilter, Prisma.AssetWhereInput> | null
 }, "id">
 
 export type SubmissionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
-  userId?: Prisma.SortOrderInput | Prisma.SortOrder
   submitterName?: Prisma.SortOrderInput | Prisma.SortOrder
   submitterEmail?: Prisma.SortOrderInput | Prisma.SortOrder
   githubUrl?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -284,6 +293,8 @@ export type SubmissionOrderByWithAggregationInput = {
   ipHash?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrderInput | Prisma.SortOrder
+  feedback?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SubmissionCountOrderByAggregateInput
   _max?: Prisma.SubmissionMaxOrderByAggregateInput
   _min?: Prisma.SubmissionMinOrderByAggregateInput
@@ -295,7 +306,6 @@ export type SubmissionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.SubmissionScalarWhereWithAggregatesInput | Prisma.SubmissionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Submission"> | string
   sessionId?: Prisma.StringWithAggregatesFilter<"Submission"> | string
-  userId?: Prisma.StringNullableWithAggregatesFilter<"Submission"> | string | null
   submitterName?: Prisma.StringNullableWithAggregatesFilter<"Submission"> | string | null
   submitterEmail?: Prisma.StringNullableWithAggregatesFilter<"Submission"> | string | null
   githubUrl?: Prisma.StringNullableWithAggregatesFilter<"Submission"> | string | null
@@ -304,6 +314,8 @@ export type SubmissionScalarWhereWithAggregatesInput = {
   ipHash?: Prisma.StringWithAggregatesFilter<"Submission"> | string
   status?: Prisma.EnumSubmissionStatusWithAggregatesFilter<"Submission"> | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Submission"> | Date | string
+  userId?: Prisma.StringNullableWithAggregatesFilter<"Submission"> | string | null
+  feedback?: Prisma.StringNullableWithAggregatesFilter<"Submission"> | string | null
 }
 
 export type SubmissionCreateInput = {
@@ -315,15 +327,15 @@ export type SubmissionCreateInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
+  feedback?: string | null
+  fileAsset?: Prisma.AssetCreateNestedOneWithoutSubmissionsInput
   session: Prisma.SessionCreateNestedOneWithoutSubmissionsInput
   user?: Prisma.UserCreateNestedOneWithoutSubmissionsInput
-  fileAsset?: Prisma.AssetCreateNestedOneWithoutSubmissionsInput
 }
 
 export type SubmissionUncheckedCreateInput = {
   id?: string
   sessionId: string
-  userId?: string | null
   submitterName?: string | null
   submitterEmail?: string | null
   githubUrl?: string | null
@@ -332,6 +344,8 @@ export type SubmissionUncheckedCreateInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
+  userId?: string | null
+  feedback?: string | null
 }
 
 export type SubmissionUpdateInput = {
@@ -343,15 +357,15 @@ export type SubmissionUpdateInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  fileAsset?: Prisma.AssetUpdateOneWithoutSubmissionsNestedInput
   session?: Prisma.SessionUpdateOneRequiredWithoutSubmissionsNestedInput
   user?: Prisma.UserUpdateOneWithoutSubmissionsNestedInput
-  fileAsset?: Prisma.AssetUpdateOneWithoutSubmissionsNestedInput
 }
 
 export type SubmissionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -360,12 +374,13 @@ export type SubmissionUncheckedUpdateInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionCreateManyInput = {
   id?: string
   sessionId: string
-  userId?: string | null
   submitterName?: string | null
   submitterEmail?: string | null
   githubUrl?: string | null
@@ -374,6 +389,8 @@ export type SubmissionCreateManyInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
+  userId?: string | null
+  feedback?: string | null
 }
 
 export type SubmissionUpdateManyMutationInput = {
@@ -385,12 +402,12 @@ export type SubmissionUpdateManyMutationInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -399,6 +416,8 @@ export type SubmissionUncheckedUpdateManyInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionListRelationFilter = {
@@ -414,7 +433,6 @@ export type SubmissionOrderByRelationAggregateInput = {
 export type SubmissionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   submitterName?: Prisma.SortOrder
   submitterEmail?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
@@ -423,12 +441,13 @@ export type SubmissionCountOrderByAggregateInput = {
   ipHash?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  feedback?: Prisma.SortOrder
 }
 
 export type SubmissionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   submitterName?: Prisma.SortOrder
   submitterEmail?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
@@ -437,12 +456,13 @@ export type SubmissionMaxOrderByAggregateInput = {
   ipHash?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  feedback?: Prisma.SortOrder
 }
 
 export type SubmissionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   sessionId?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
   submitterName?: Prisma.SortOrder
   submitterEmail?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
@@ -451,6 +471,8 @@ export type SubmissionMinOrderByAggregateInput = {
   ipHash?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  feedback?: Prisma.SortOrder
 }
 
 export type SubmissionCreateNestedManyWithoutUserInput = {
@@ -592,8 +614,9 @@ export type SubmissionCreateWithoutUserInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
-  session: Prisma.SessionCreateNestedOneWithoutSubmissionsInput
+  feedback?: string | null
   fileAsset?: Prisma.AssetCreateNestedOneWithoutSubmissionsInput
+  session: Prisma.SessionCreateNestedOneWithoutSubmissionsInput
 }
 
 export type SubmissionUncheckedCreateWithoutUserInput = {
@@ -607,6 +630,7 @@ export type SubmissionUncheckedCreateWithoutUserInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
+  feedback?: string | null
 }
 
 export type SubmissionCreateOrConnectWithoutUserInput = {
@@ -641,7 +665,6 @@ export type SubmissionScalarWhereInput = {
   NOT?: Prisma.SubmissionScalarWhereInput | Prisma.SubmissionScalarWhereInput[]
   id?: Prisma.StringFilter<"Submission"> | string
   sessionId?: Prisma.StringFilter<"Submission"> | string
-  userId?: Prisma.StringNullableFilter<"Submission"> | string | null
   submitterName?: Prisma.StringNullableFilter<"Submission"> | string | null
   submitterEmail?: Prisma.StringNullableFilter<"Submission"> | string | null
   githubUrl?: Prisma.StringNullableFilter<"Submission"> | string | null
@@ -650,6 +673,8 @@ export type SubmissionScalarWhereInput = {
   ipHash?: Prisma.StringFilter<"Submission"> | string
   status?: Prisma.EnumSubmissionStatusFilter<"Submission"> | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFilter<"Submission"> | Date | string
+  userId?: Prisma.StringNullableFilter<"Submission"> | string | null
+  feedback?: Prisma.StringNullableFilter<"Submission"> | string | null
 }
 
 export type SubmissionCreateWithoutSessionInput = {
@@ -661,13 +686,13 @@ export type SubmissionCreateWithoutSessionInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
-  user?: Prisma.UserCreateNestedOneWithoutSubmissionsInput
+  feedback?: string | null
   fileAsset?: Prisma.AssetCreateNestedOneWithoutSubmissionsInput
+  user?: Prisma.UserCreateNestedOneWithoutSubmissionsInput
 }
 
 export type SubmissionUncheckedCreateWithoutSessionInput = {
   id?: string
-  userId?: string | null
   submitterName?: string | null
   submitterEmail?: string | null
   githubUrl?: string | null
@@ -676,6 +701,8 @@ export type SubmissionUncheckedCreateWithoutSessionInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
+  userId?: string | null
+  feedback?: string | null
 }
 
 export type SubmissionCreateOrConnectWithoutSessionInput = {
@@ -713,6 +740,7 @@ export type SubmissionCreateWithoutFileAssetInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
+  feedback?: string | null
   session: Prisma.SessionCreateNestedOneWithoutSubmissionsInput
   user?: Prisma.UserCreateNestedOneWithoutSubmissionsInput
 }
@@ -720,7 +748,6 @@ export type SubmissionCreateWithoutFileAssetInput = {
 export type SubmissionUncheckedCreateWithoutFileAssetInput = {
   id?: string
   sessionId: string
-  userId?: string | null
   submitterName?: string | null
   submitterEmail?: string | null
   githubUrl?: string | null
@@ -728,6 +755,8 @@ export type SubmissionUncheckedCreateWithoutFileAssetInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
+  userId?: string | null
+  feedback?: string | null
 }
 
 export type SubmissionCreateOrConnectWithoutFileAssetInput = {
@@ -767,6 +796,7 @@ export type SubmissionCreateManyUserInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
+  feedback?: string | null
 }
 
 export type SubmissionUpdateWithoutUserInput = {
@@ -778,8 +808,9 @@ export type SubmissionUpdateWithoutUserInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  session?: Prisma.SessionUpdateOneRequiredWithoutSubmissionsNestedInput
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileAsset?: Prisma.AssetUpdateOneWithoutSubmissionsNestedInput
+  session?: Prisma.SessionUpdateOneRequiredWithoutSubmissionsNestedInput
 }
 
 export type SubmissionUncheckedUpdateWithoutUserInput = {
@@ -793,6 +824,7 @@ export type SubmissionUncheckedUpdateWithoutUserInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionUncheckedUpdateManyWithoutUserInput = {
@@ -806,11 +838,11 @@ export type SubmissionUncheckedUpdateManyWithoutUserInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionCreateManySessionInput = {
   id?: string
-  userId?: string | null
   submitterName?: string | null
   submitterEmail?: string | null
   githubUrl?: string | null
@@ -819,6 +851,8 @@ export type SubmissionCreateManySessionInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
+  userId?: string | null
+  feedback?: string | null
 }
 
 export type SubmissionUpdateWithoutSessionInput = {
@@ -830,13 +864,13 @@ export type SubmissionUpdateWithoutSessionInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneWithoutSubmissionsNestedInput
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fileAsset?: Prisma.AssetUpdateOneWithoutSubmissionsNestedInput
+  user?: Prisma.UserUpdateOneWithoutSubmissionsNestedInput
 }
 
 export type SubmissionUncheckedUpdateWithoutSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -845,11 +879,12 @@ export type SubmissionUncheckedUpdateWithoutSessionInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionUncheckedUpdateManyWithoutSessionInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -858,12 +893,13 @@ export type SubmissionUncheckedUpdateManyWithoutSessionInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionCreateManyFileAssetInput = {
   id?: string
   sessionId: string
-  userId?: string | null
   submitterName?: string | null
   submitterEmail?: string | null
   githubUrl?: string | null
@@ -871,6 +907,8 @@ export type SubmissionCreateManyFileAssetInput = {
   ipHash: string
   status?: $Enums.SubmissionStatus
   createdAt?: Date | string
+  userId?: string | null
+  feedback?: string | null
 }
 
 export type SubmissionUpdateWithoutFileAssetInput = {
@@ -882,6 +920,7 @@ export type SubmissionUpdateWithoutFileAssetInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   session?: Prisma.SessionUpdateOneRequiredWithoutSubmissionsNestedInput
   user?: Prisma.UserUpdateOneWithoutSubmissionsNestedInput
 }
@@ -889,7 +928,6 @@ export type SubmissionUpdateWithoutFileAssetInput = {
 export type SubmissionUncheckedUpdateWithoutFileAssetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -897,12 +935,13 @@ export type SubmissionUncheckedUpdateWithoutFileAssetInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionUncheckedUpdateManyWithoutFileAssetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   sessionId?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   submitterEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -910,6 +949,8 @@ export type SubmissionUncheckedUpdateManyWithoutFileAssetInput = {
   ipHash?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumSubmissionStatusFieldUpdateOperationsInput | $Enums.SubmissionStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feedback?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -917,7 +958,6 @@ export type SubmissionUncheckedUpdateManyWithoutFileAssetInput = {
 export type SubmissionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   sessionId?: boolean
-  userId?: boolean
   submitterName?: boolean
   submitterEmail?: boolean
   githubUrl?: boolean
@@ -926,15 +966,16 @@ export type SubmissionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   ipHash?: boolean
   status?: boolean
   createdAt?: boolean
+  userId?: boolean
+  feedback?: boolean
+  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
   session?: boolean | Prisma.SessionDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Submission$userArgs<ExtArgs>
-  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
 }, ExtArgs["result"]["submission"]>
 
 export type SubmissionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   sessionId?: boolean
-  userId?: boolean
   submitterName?: boolean
   submitterEmail?: boolean
   githubUrl?: boolean
@@ -943,15 +984,16 @@ export type SubmissionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   ipHash?: boolean
   status?: boolean
   createdAt?: boolean
+  userId?: boolean
+  feedback?: boolean
+  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
   session?: boolean | Prisma.SessionDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Submission$userArgs<ExtArgs>
-  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
 }, ExtArgs["result"]["submission"]>
 
 export type SubmissionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   sessionId?: boolean
-  userId?: boolean
   submitterName?: boolean
   submitterEmail?: boolean
   githubUrl?: boolean
@@ -960,15 +1002,16 @@ export type SubmissionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   ipHash?: boolean
   status?: boolean
   createdAt?: boolean
+  userId?: boolean
+  feedback?: boolean
+  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
   session?: boolean | Prisma.SessionDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Submission$userArgs<ExtArgs>
-  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
 }, ExtArgs["result"]["submission"]>
 
 export type SubmissionSelectScalar = {
   id?: boolean
   sessionId?: boolean
-  userId?: boolean
   submitterName?: boolean
   submitterEmail?: boolean
   githubUrl?: boolean
@@ -977,36 +1020,37 @@ export type SubmissionSelectScalar = {
   ipHash?: boolean
   status?: boolean
   createdAt?: boolean
+  userId?: boolean
+  feedback?: boolean
 }
 
-export type SubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionId" | "userId" | "submitterName" | "submitterEmail" | "githubUrl" | "fileAssetId" | "message" | "ipHash" | "status" | "createdAt", ExtArgs["result"]["submission"]>
+export type SubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "sessionId" | "submitterName" | "submitterEmail" | "githubUrl" | "fileAssetId" | "message" | "ipHash" | "status" | "createdAt" | "userId" | "feedback", ExtArgs["result"]["submission"]>
 export type SubmissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
   session?: boolean | Prisma.SessionDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Submission$userArgs<ExtArgs>
-  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
 }
 export type SubmissionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
   session?: boolean | Prisma.SessionDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Submission$userArgs<ExtArgs>
-  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
 }
 export type SubmissionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
   session?: boolean | Prisma.SessionDefaultArgs<ExtArgs>
   user?: boolean | Prisma.Submission$userArgs<ExtArgs>
-  fileAsset?: boolean | Prisma.Submission$fileAssetArgs<ExtArgs>
 }
 
 export type $SubmissionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Submission"
   objects: {
+    fileAsset: Prisma.$AssetPayload<ExtArgs> | null
     session: Prisma.$SessionPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs> | null
-    fileAsset: Prisma.$AssetPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     sessionId: string
-    userId: string | null
     submitterName: string | null
     submitterEmail: string | null
     githubUrl: string | null
@@ -1015,6 +1059,8 @@ export type $SubmissionPayload<ExtArgs extends runtime.Types.Extensions.Internal
     ipHash: string
     status: $Enums.SubmissionStatus
     createdAt: Date
+    userId: string | null
+    feedback: string | null
   }, ExtArgs["result"]["submission"]>
   composites: {}
 }
@@ -1409,9 +1455,9 @@ readonly fields: SubmissionFieldRefs;
  */
 export interface Prisma__SubmissionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  fileAsset<T extends Prisma.Submission$fileAssetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Submission$fileAssetArgs<ExtArgs>>): Prisma.Prisma__AssetClient<runtime.Types.Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   session<T extends Prisma.SessionDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SessionDefaultArgs<ExtArgs>>): Prisma.Prisma__SessionClient<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.Submission$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Submission$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  fileAsset<T extends Prisma.Submission$fileAssetArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Submission$fileAssetArgs<ExtArgs>>): Prisma.Prisma__AssetClient<runtime.Types.Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1443,7 +1489,6 @@ export interface Prisma__SubmissionClient<T, Null = never, ExtArgs extends runti
 export interface SubmissionFieldRefs {
   readonly id: Prisma.FieldRef<"Submission", 'String'>
   readonly sessionId: Prisma.FieldRef<"Submission", 'String'>
-  readonly userId: Prisma.FieldRef<"Submission", 'String'>
   readonly submitterName: Prisma.FieldRef<"Submission", 'String'>
   readonly submitterEmail: Prisma.FieldRef<"Submission", 'String'>
   readonly githubUrl: Prisma.FieldRef<"Submission", 'String'>
@@ -1452,6 +1497,8 @@ export interface SubmissionFieldRefs {
   readonly ipHash: Prisma.FieldRef<"Submission", 'String'>
   readonly status: Prisma.FieldRef<"Submission", 'SubmissionStatus'>
   readonly createdAt: Prisma.FieldRef<"Submission", 'DateTime'>
+  readonly userId: Prisma.FieldRef<"Submission", 'String'>
+  readonly feedback: Prisma.FieldRef<"Submission", 'String'>
 }
     
 
@@ -1848,25 +1895,6 @@ export type SubmissionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
 }
 
 /**
- * Submission.user
- */
-export type Submission$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
  * Submission.fileAsset
  */
 export type Submission$fileAssetArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1883,6 +1911,25 @@ export type Submission$fileAssetArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   include?: Prisma.AssetInclude<ExtArgs> | null
   where?: Prisma.AssetWhereInput
+}
+
+/**
+ * Submission.user
+ */
+export type Submission$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

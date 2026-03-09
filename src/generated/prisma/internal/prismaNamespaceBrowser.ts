@@ -55,6 +55,7 @@ export const ModelName = {
   Session: 'Session',
   SessionBlock: 'SessionBlock',
   Asset: 'Asset',
+  Attendance: 'Attendance',
   Submission: 'Submission'
 } as const
 
@@ -79,9 +80,9 @@ export const UserScalarFieldEnum = {
   email: 'email',
   name: 'name',
   passwordHash: 'passwordHash',
+  createdAt: 'createdAt',
   role: 'role',
-  status: 'status',
-  createdAt: 'createdAt'
+  status: 'status'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -94,11 +95,11 @@ export const SessionScalarFieldEnum = {
   summary: 'summary',
   goals: 'goals',
   prerequisites: 'prerequisites',
-  location: 'location',
-  presenterId: 'presenterId',
   published: 'published',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  presenterId: 'presenterId',
+  location: 'location'
 } as const
 
 export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -136,10 +137,21 @@ export const AssetScalarFieldEnum = {
 export type AssetScalarFieldEnum = (typeof AssetScalarFieldEnum)[keyof typeof AssetScalarFieldEnum]
 
 
-export const SubmissionScalarFieldEnum = {
+export const AttendanceScalarFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
   userId: 'userId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AttendanceScalarFieldEnum = (typeof AttendanceScalarFieldEnum)[keyof typeof AttendanceScalarFieldEnum]
+
+
+export const SubmissionScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
   submitterName: 'submitterName',
   submitterEmail: 'submitterEmail',
   githubUrl: 'githubUrl',
@@ -147,7 +159,9 @@ export const SubmissionScalarFieldEnum = {
   message: 'message',
   ipHash: 'ipHash',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  userId: 'userId',
+  feedback: 'feedback'
 } as const
 
 export type SubmissionScalarFieldEnum = (typeof SubmissionScalarFieldEnum)[keyof typeof SubmissionScalarFieldEnum]

@@ -29,11 +29,11 @@ export type SessionMinAggregateOutputType = {
   title: string | null
   date: Date | null
   summary: string | null
-  location: string | null
-  presenterId: string | null
   published: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  presenterId: string | null
+  location: string | null
 }
 
 export type SessionMaxAggregateOutputType = {
@@ -41,11 +41,11 @@ export type SessionMaxAggregateOutputType = {
   title: string | null
   date: Date | null
   summary: string | null
-  location: string | null
-  presenterId: string | null
   published: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
+  presenterId: string | null
+  location: string | null
 }
 
 export type SessionCountAggregateOutputType = {
@@ -55,11 +55,11 @@ export type SessionCountAggregateOutputType = {
   summary: number
   goals: number
   prerequisites: number
-  location: number
-  presenterId: number
   published: number
   createdAt: number
   updatedAt: number
+  presenterId: number
+  location: number
   _all: number
 }
 
@@ -69,11 +69,11 @@ export type SessionMinAggregateInputType = {
   title?: true
   date?: true
   summary?: true
-  location?: true
-  presenterId?: true
   published?: true
   createdAt?: true
   updatedAt?: true
+  presenterId?: true
+  location?: true
 }
 
 export type SessionMaxAggregateInputType = {
@@ -81,11 +81,11 @@ export type SessionMaxAggregateInputType = {
   title?: true
   date?: true
   summary?: true
-  location?: true
-  presenterId?: true
   published?: true
   createdAt?: true
   updatedAt?: true
+  presenterId?: true
+  location?: true
 }
 
 export type SessionCountAggregateInputType = {
@@ -95,11 +95,11 @@ export type SessionCountAggregateInputType = {
   summary?: true
   goals?: true
   prerequisites?: true
-  location?: true
-  presenterId?: true
   published?: true
   createdAt?: true
   updatedAt?: true
+  presenterId?: true
+  location?: true
   _all?: true
 }
 
@@ -182,11 +182,11 @@ export type SessionGroupByOutputType = {
   summary: string
   goals: string[]
   prerequisites: string[]
-  location: string | null
-  presenterId: string | null
   published: boolean
   createdAt: Date
   updatedAt: Date
+  presenterId: string | null
+  location: string | null
   _count: SessionCountAggregateOutputType | null
   _min: SessionMinAggregateOutputType | null
   _max: SessionMaxAggregateOutputType | null
@@ -217,14 +217,15 @@ export type SessionWhereInput = {
   summary?: Prisma.StringFilter<"Session"> | string
   goals?: Prisma.StringNullableListFilter<"Session">
   prerequisites?: Prisma.StringNullableListFilter<"Session">
-  location?: Prisma.StringNullableFilter<"Session"> | string | null
-  presenterId?: Prisma.StringNullableFilter<"Session"> | string | null
   published?: Prisma.BoolFilter<"Session"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Session"> | Date | string
+  presenterId?: Prisma.StringNullableFilter<"Session"> | string | null
+  location?: Prisma.StringNullableFilter<"Session"> | string | null
+  assets?: Prisma.AssetListRelationFilter
+  attendances?: Prisma.AttendanceListRelationFilter
   presenter?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   blocks?: Prisma.SessionBlockListRelationFilter
-  assets?: Prisma.AssetListRelationFilter
   submissions?: Prisma.SubmissionListRelationFilter
 }
 
@@ -235,14 +236,15 @@ export type SessionOrderByWithRelationInput = {
   summary?: Prisma.SortOrder
   goals?: Prisma.SortOrder
   prerequisites?: Prisma.SortOrder
-  location?: Prisma.SortOrderInput | Prisma.SortOrder
-  presenterId?: Prisma.SortOrderInput | Prisma.SortOrder
   published?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  presenterId?: Prisma.SortOrderInput | Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
+  assets?: Prisma.AssetOrderByRelationAggregateInput
+  attendances?: Prisma.AttendanceOrderByRelationAggregateInput
   presenter?: Prisma.UserOrderByWithRelationInput
   blocks?: Prisma.SessionBlockOrderByRelationAggregateInput
-  assets?: Prisma.AssetOrderByRelationAggregateInput
   submissions?: Prisma.SubmissionOrderByRelationAggregateInput
 }
 
@@ -256,14 +258,15 @@ export type SessionWhereUniqueInput = Prisma.AtLeast<{
   summary?: Prisma.StringFilter<"Session"> | string
   goals?: Prisma.StringNullableListFilter<"Session">
   prerequisites?: Prisma.StringNullableListFilter<"Session">
-  location?: Prisma.StringNullableFilter<"Session"> | string | null
-  presenterId?: Prisma.StringNullableFilter<"Session"> | string | null
   published?: Prisma.BoolFilter<"Session"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Session"> | Date | string
+  presenterId?: Prisma.StringNullableFilter<"Session"> | string | null
+  location?: Prisma.StringNullableFilter<"Session"> | string | null
+  assets?: Prisma.AssetListRelationFilter
+  attendances?: Prisma.AttendanceListRelationFilter
   presenter?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   blocks?: Prisma.SessionBlockListRelationFilter
-  assets?: Prisma.AssetListRelationFilter
   submissions?: Prisma.SubmissionListRelationFilter
 }, "id">
 
@@ -274,11 +277,11 @@ export type SessionOrderByWithAggregationInput = {
   summary?: Prisma.SortOrder
   goals?: Prisma.SortOrder
   prerequisites?: Prisma.SortOrder
-  location?: Prisma.SortOrderInput | Prisma.SortOrder
-  presenterId?: Prisma.SortOrderInput | Prisma.SortOrder
   published?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  presenterId?: Prisma.SortOrderInput | Prisma.SortOrder
+  location?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SessionCountOrderByAggregateInput
   _max?: Prisma.SessionMaxOrderByAggregateInput
   _min?: Prisma.SessionMinOrderByAggregateInput
@@ -294,11 +297,11 @@ export type SessionScalarWhereWithAggregatesInput = {
   summary?: Prisma.StringWithAggregatesFilter<"Session"> | string
   goals?: Prisma.StringNullableListFilter<"Session">
   prerequisites?: Prisma.StringNullableListFilter<"Session">
-  location?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
-  presenterId?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
   published?: Prisma.BoolWithAggregatesFilter<"Session"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Session"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Session"> | Date | string
+  presenterId?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
+  location?: Prisma.StringNullableWithAggregatesFilter<"Session"> | string | null
 }
 
 export type SessionCreateInput = {
@@ -308,13 +311,14 @@ export type SessionCreateInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  location?: string | null
+  assets?: Prisma.AssetCreateNestedManyWithoutSessionInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutSessionInput
   presenter?: Prisma.UserCreateNestedOneWithoutPresentedSessionsInput
   blocks?: Prisma.SessionBlockCreateNestedManyWithoutSessionInput
-  assets?: Prisma.AssetCreateNestedManyWithoutSessionInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSessionInput
 }
 
@@ -325,13 +329,14 @@ export type SessionUncheckedCreateInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
-  presenterId?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  blocks?: Prisma.SessionBlockUncheckedCreateNestedManyWithoutSessionInput
+  presenterId?: string | null
+  location?: string | null
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutSessionInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSessionInput
+  blocks?: Prisma.SessionBlockUncheckedCreateNestedManyWithoutSessionInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSessionInput
 }
 
@@ -342,13 +347,14 @@ export type SessionUpdateInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assets?: Prisma.AssetUpdateManyWithoutSessionNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutSessionNestedInput
   presenter?: Prisma.UserUpdateOneWithoutPresentedSessionsNestedInput
   blocks?: Prisma.SessionBlockUpdateManyWithoutSessionNestedInput
-  assets?: Prisma.AssetUpdateManyWithoutSessionNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutSessionNestedInput
 }
 
@@ -359,13 +365,14 @@ export type SessionUncheckedUpdateInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  presenterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  blocks?: Prisma.SessionBlockUncheckedUpdateManyWithoutSessionNestedInput
+  presenterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assets?: Prisma.AssetUncheckedUpdateManyWithoutSessionNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutSessionNestedInput
+  blocks?: Prisma.SessionBlockUncheckedUpdateManyWithoutSessionNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSessionNestedInput
 }
 
@@ -376,11 +383,11 @@ export type SessionCreateManyInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
-  presenterId?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  presenterId?: string | null
+  location?: string | null
 }
 
 export type SessionUpdateManyMutationInput = {
@@ -390,10 +397,10 @@ export type SessionUpdateManyMutationInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SessionUncheckedUpdateManyInput = {
@@ -403,11 +410,11 @@ export type SessionUncheckedUpdateManyInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  presenterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  presenterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SessionListRelationFilter = {
@@ -435,11 +442,11 @@ export type SessionCountOrderByAggregateInput = {
   summary?: Prisma.SortOrder
   goals?: Prisma.SortOrder
   prerequisites?: Prisma.SortOrder
-  location?: Prisma.SortOrder
-  presenterId?: Prisma.SortOrder
   published?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  presenterId?: Prisma.SortOrder
+  location?: Prisma.SortOrder
 }
 
 export type SessionMaxOrderByAggregateInput = {
@@ -447,11 +454,11 @@ export type SessionMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   date?: Prisma.SortOrder
   summary?: Prisma.SortOrder
-  location?: Prisma.SortOrder
-  presenterId?: Prisma.SortOrder
   published?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  presenterId?: Prisma.SortOrder
+  location?: Prisma.SortOrder
 }
 
 export type SessionMinOrderByAggregateInput = {
@@ -459,11 +466,11 @@ export type SessionMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   date?: Prisma.SortOrder
   summary?: Prisma.SortOrder
-  location?: Prisma.SortOrder
-  presenterId?: Prisma.SortOrder
   published?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  presenterId?: Prisma.SortOrder
+  location?: Prisma.SortOrder
 }
 
 export type SessionScalarRelationFilter = {
@@ -531,12 +538,12 @@ export type SessionUpdateprerequisitesInput = {
   push?: string | string[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type BoolFieldUpdateOperationsInput = {
   set?: boolean
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type SessionCreateNestedOneWithoutBlocksInput = {
@@ -567,6 +574,20 @@ export type SessionUpdateOneRequiredWithoutAssetsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SessionUpdateToOneWithWhereWithoutAssetsInput, Prisma.SessionUpdateWithoutAssetsInput>, Prisma.SessionUncheckedUpdateWithoutAssetsInput>
 }
 
+export type SessionCreateNestedOneWithoutAttendancesInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutAttendancesInput, Prisma.SessionUncheckedCreateWithoutAttendancesInput>
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutAttendancesInput
+  connect?: Prisma.SessionWhereUniqueInput
+}
+
+export type SessionUpdateOneRequiredWithoutAttendancesNestedInput = {
+  create?: Prisma.XOR<Prisma.SessionCreateWithoutAttendancesInput, Prisma.SessionUncheckedCreateWithoutAttendancesInput>
+  connectOrCreate?: Prisma.SessionCreateOrConnectWithoutAttendancesInput
+  upsert?: Prisma.SessionUpsertWithoutAttendancesInput
+  connect?: Prisma.SessionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SessionUpdateToOneWithWhereWithoutAttendancesInput, Prisma.SessionUpdateWithoutAttendancesInput>, Prisma.SessionUncheckedUpdateWithoutAttendancesInput>
+}
+
 export type SessionCreateNestedOneWithoutSubmissionsInput = {
   create?: Prisma.XOR<Prisma.SessionCreateWithoutSubmissionsInput, Prisma.SessionUncheckedCreateWithoutSubmissionsInput>
   connectOrCreate?: Prisma.SessionCreateOrConnectWithoutSubmissionsInput
@@ -588,12 +609,13 @@ export type SessionCreateWithoutPresenterInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  blocks?: Prisma.SessionBlockCreateNestedManyWithoutSessionInput
+  location?: string | null
   assets?: Prisma.AssetCreateNestedManyWithoutSessionInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutSessionInput
+  blocks?: Prisma.SessionBlockCreateNestedManyWithoutSessionInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSessionInput
 }
 
@@ -604,12 +626,13 @@ export type SessionUncheckedCreateWithoutPresenterInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  blocks?: Prisma.SessionBlockUncheckedCreateNestedManyWithoutSessionInput
+  location?: string | null
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutSessionInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSessionInput
+  blocks?: Prisma.SessionBlockUncheckedCreateNestedManyWithoutSessionInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSessionInput
 }
 
@@ -649,11 +672,11 @@ export type SessionScalarWhereInput = {
   summary?: Prisma.StringFilter<"Session"> | string
   goals?: Prisma.StringNullableListFilter<"Session">
   prerequisites?: Prisma.StringNullableListFilter<"Session">
-  location?: Prisma.StringNullableFilter<"Session"> | string | null
-  presenterId?: Prisma.StringNullableFilter<"Session"> | string | null
   published?: Prisma.BoolFilter<"Session"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Session"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Session"> | Date | string
+  presenterId?: Prisma.StringNullableFilter<"Session"> | string | null
+  location?: Prisma.StringNullableFilter<"Session"> | string | null
 }
 
 export type SessionCreateWithoutBlocksInput = {
@@ -663,12 +686,13 @@ export type SessionCreateWithoutBlocksInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  presenter?: Prisma.UserCreateNestedOneWithoutPresentedSessionsInput
+  location?: string | null
   assets?: Prisma.AssetCreateNestedManyWithoutSessionInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutSessionInput
+  presenter?: Prisma.UserCreateNestedOneWithoutPresentedSessionsInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSessionInput
 }
 
@@ -679,12 +703,13 @@ export type SessionUncheckedCreateWithoutBlocksInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
-  presenterId?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  presenterId?: string | null
+  location?: string | null
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutSessionInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSessionInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSessionInput
 }
 
@@ -711,12 +736,13 @@ export type SessionUpdateWithoutBlocksInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  presenter?: Prisma.UserUpdateOneWithoutPresentedSessionsNestedInput
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assets?: Prisma.AssetUpdateManyWithoutSessionNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutSessionNestedInput
+  presenter?: Prisma.UserUpdateOneWithoutPresentedSessionsNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutSessionNestedInput
 }
 
@@ -727,12 +753,13 @@ export type SessionUncheckedUpdateWithoutBlocksInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  presenterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  presenterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assets?: Prisma.AssetUncheckedUpdateManyWithoutSessionNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutSessionNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSessionNestedInput
 }
 
@@ -743,10 +770,11 @@ export type SessionCreateWithoutAssetsInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  location?: string | null
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutSessionInput
   presenter?: Prisma.UserCreateNestedOneWithoutPresentedSessionsInput
   blocks?: Prisma.SessionBlockCreateNestedManyWithoutSessionInput
   submissions?: Prisma.SubmissionCreateNestedManyWithoutSessionInput
@@ -759,11 +787,12 @@ export type SessionUncheckedCreateWithoutAssetsInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
-  presenterId?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  presenterId?: string | null
+  location?: string | null
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSessionInput
   blocks?: Prisma.SessionBlockUncheckedCreateNestedManyWithoutSessionInput
   submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSessionInput
 }
@@ -791,10 +820,11 @@ export type SessionUpdateWithoutAssetsInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendances?: Prisma.AttendanceUpdateManyWithoutSessionNestedInput
   presenter?: Prisma.UserUpdateOneWithoutPresentedSessionsNestedInput
   blocks?: Prisma.SessionBlockUpdateManyWithoutSessionNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutSessionNestedInput
@@ -807,11 +837,96 @@ export type SessionUncheckedUpdateWithoutAssetsInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  presenterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  presenterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutSessionNestedInput
+  blocks?: Prisma.SessionBlockUncheckedUpdateManyWithoutSessionNestedInput
+  submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSessionNestedInput
+}
+
+export type SessionCreateWithoutAttendancesInput = {
+  id?: string
+  title: string
+  date: Date | string
+  summary: string
+  goals?: Prisma.SessionCreategoalsInput | string[]
+  prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
+  published?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  location?: string | null
+  assets?: Prisma.AssetCreateNestedManyWithoutSessionInput
+  presenter?: Prisma.UserCreateNestedOneWithoutPresentedSessionsInput
+  blocks?: Prisma.SessionBlockCreateNestedManyWithoutSessionInput
+  submissions?: Prisma.SubmissionCreateNestedManyWithoutSessionInput
+}
+
+export type SessionUncheckedCreateWithoutAttendancesInput = {
+  id?: string
+  title: string
+  date: Date | string
+  summary: string
+  goals?: Prisma.SessionCreategoalsInput | string[]
+  prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
+  published?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  presenterId?: string | null
+  location?: string | null
+  assets?: Prisma.AssetUncheckedCreateNestedManyWithoutSessionInput
+  blocks?: Prisma.SessionBlockUncheckedCreateNestedManyWithoutSessionInput
+  submissions?: Prisma.SubmissionUncheckedCreateNestedManyWithoutSessionInput
+}
+
+export type SessionCreateOrConnectWithoutAttendancesInput = {
+  where: Prisma.SessionWhereUniqueInput
+  create: Prisma.XOR<Prisma.SessionCreateWithoutAttendancesInput, Prisma.SessionUncheckedCreateWithoutAttendancesInput>
+}
+
+export type SessionUpsertWithoutAttendancesInput = {
+  update: Prisma.XOR<Prisma.SessionUpdateWithoutAttendancesInput, Prisma.SessionUncheckedUpdateWithoutAttendancesInput>
+  create: Prisma.XOR<Prisma.SessionCreateWithoutAttendancesInput, Prisma.SessionUncheckedCreateWithoutAttendancesInput>
+  where?: Prisma.SessionWhereInput
+}
+
+export type SessionUpdateToOneWithWhereWithoutAttendancesInput = {
+  where?: Prisma.SessionWhereInput
+  data: Prisma.XOR<Prisma.SessionUpdateWithoutAttendancesInput, Prisma.SessionUncheckedUpdateWithoutAttendancesInput>
+}
+
+export type SessionUpdateWithoutAttendancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  goals?: Prisma.SessionUpdategoalsInput | string[]
+  prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assets?: Prisma.AssetUpdateManyWithoutSessionNestedInput
+  presenter?: Prisma.UserUpdateOneWithoutPresentedSessionsNestedInput
+  blocks?: Prisma.SessionBlockUpdateManyWithoutSessionNestedInput
+  submissions?: Prisma.SubmissionUpdateManyWithoutSessionNestedInput
+}
+
+export type SessionUncheckedUpdateWithoutAttendancesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  summary?: Prisma.StringFieldUpdateOperationsInput | string
+  goals?: Prisma.SessionUpdategoalsInput | string[]
+  prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
+  published?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  presenterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assets?: Prisma.AssetUncheckedUpdateManyWithoutSessionNestedInput
   blocks?: Prisma.SessionBlockUncheckedUpdateManyWithoutSessionNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSessionNestedInput
 }
@@ -823,13 +938,14 @@ export type SessionCreateWithoutSubmissionsInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  location?: string | null
+  assets?: Prisma.AssetCreateNestedManyWithoutSessionInput
+  attendances?: Prisma.AttendanceCreateNestedManyWithoutSessionInput
   presenter?: Prisma.UserCreateNestedOneWithoutPresentedSessionsInput
   blocks?: Prisma.SessionBlockCreateNestedManyWithoutSessionInput
-  assets?: Prisma.AssetCreateNestedManyWithoutSessionInput
 }
 
 export type SessionUncheckedCreateWithoutSubmissionsInput = {
@@ -839,13 +955,14 @@ export type SessionUncheckedCreateWithoutSubmissionsInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
-  presenterId?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  blocks?: Prisma.SessionBlockUncheckedCreateNestedManyWithoutSessionInput
+  presenterId?: string | null
+  location?: string | null
   assets?: Prisma.AssetUncheckedCreateNestedManyWithoutSessionInput
+  attendances?: Prisma.AttendanceUncheckedCreateNestedManyWithoutSessionInput
+  blocks?: Prisma.SessionBlockUncheckedCreateNestedManyWithoutSessionInput
 }
 
 export type SessionCreateOrConnectWithoutSubmissionsInput = {
@@ -871,13 +988,14 @@ export type SessionUpdateWithoutSubmissionsInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assets?: Prisma.AssetUpdateManyWithoutSessionNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutSessionNestedInput
   presenter?: Prisma.UserUpdateOneWithoutPresentedSessionsNestedInput
   blocks?: Prisma.SessionBlockUpdateManyWithoutSessionNestedInput
-  assets?: Prisma.AssetUpdateManyWithoutSessionNestedInput
 }
 
 export type SessionUncheckedUpdateWithoutSubmissionsInput = {
@@ -887,13 +1005,14 @@ export type SessionUncheckedUpdateWithoutSubmissionsInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  presenterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  blocks?: Prisma.SessionBlockUncheckedUpdateManyWithoutSessionNestedInput
+  presenterId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assets?: Prisma.AssetUncheckedUpdateManyWithoutSessionNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutSessionNestedInput
+  blocks?: Prisma.SessionBlockUncheckedUpdateManyWithoutSessionNestedInput
 }
 
 export type SessionCreateManyPresenterInput = {
@@ -903,10 +1022,10 @@ export type SessionCreateManyPresenterInput = {
   summary: string
   goals?: Prisma.SessionCreategoalsInput | string[]
   prerequisites?: Prisma.SessionCreateprerequisitesInput | string[]
-  location?: string | null
   published?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  location?: string | null
 }
 
 export type SessionUpdateWithoutPresenterInput = {
@@ -916,12 +1035,13 @@ export type SessionUpdateWithoutPresenterInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  blocks?: Prisma.SessionBlockUpdateManyWithoutSessionNestedInput
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assets?: Prisma.AssetUpdateManyWithoutSessionNestedInput
+  attendances?: Prisma.AttendanceUpdateManyWithoutSessionNestedInput
+  blocks?: Prisma.SessionBlockUpdateManyWithoutSessionNestedInput
   submissions?: Prisma.SubmissionUpdateManyWithoutSessionNestedInput
 }
 
@@ -932,12 +1052,13 @@ export type SessionUncheckedUpdateWithoutPresenterInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  blocks?: Prisma.SessionBlockUncheckedUpdateManyWithoutSessionNestedInput
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assets?: Prisma.AssetUncheckedUpdateManyWithoutSessionNestedInput
+  attendances?: Prisma.AttendanceUncheckedUpdateManyWithoutSessionNestedInput
+  blocks?: Prisma.SessionBlockUncheckedUpdateManyWithoutSessionNestedInput
   submissions?: Prisma.SubmissionUncheckedUpdateManyWithoutSessionNestedInput
 }
 
@@ -948,10 +1069,10 @@ export type SessionUncheckedUpdateManyWithoutPresenterInput = {
   summary?: Prisma.StringFieldUpdateOperationsInput | string
   goals?: Prisma.SessionUpdategoalsInput | string[]
   prerequisites?: Prisma.SessionUpdateprerequisitesInput | string[]
-  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   published?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -960,14 +1081,16 @@ export type SessionUncheckedUpdateManyWithoutPresenterInput = {
  */
 
 export type SessionCountOutputType = {
-  blocks: number
   assets: number
+  attendances: number
+  blocks: number
   submissions: number
 }
 
 export type SessionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  blocks?: boolean | SessionCountOutputTypeCountBlocksArgs
   assets?: boolean | SessionCountOutputTypeCountAssetsArgs
+  attendances?: boolean | SessionCountOutputTypeCountAttendancesArgs
+  blocks?: boolean | SessionCountOutputTypeCountBlocksArgs
   submissions?: boolean | SessionCountOutputTypeCountSubmissionsArgs
 }
 
@@ -984,15 +1107,22 @@ export type SessionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * SessionCountOutputType without action
  */
-export type SessionCountOutputTypeCountBlocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SessionBlockWhereInput
+export type SessionCountOutputTypeCountAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AssetWhereInput
 }
 
 /**
  * SessionCountOutputType without action
  */
-export type SessionCountOutputTypeCountAssetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AssetWhereInput
+export type SessionCountOutputTypeCountAttendancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttendanceWhereInput
+}
+
+/**
+ * SessionCountOutputType without action
+ */
+export type SessionCountOutputTypeCountBlocksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SessionBlockWhereInput
 }
 
 /**
@@ -1010,14 +1140,15 @@ export type SessionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   summary?: boolean
   goals?: boolean
   prerequisites?: boolean
-  location?: boolean
-  presenterId?: boolean
   published?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  presenterId?: boolean
+  location?: boolean
+  assets?: boolean | Prisma.Session$assetsArgs<ExtArgs>
+  attendances?: boolean | Prisma.Session$attendancesArgs<ExtArgs>
   presenter?: boolean | Prisma.Session$presenterArgs<ExtArgs>
   blocks?: boolean | Prisma.Session$blocksArgs<ExtArgs>
-  assets?: boolean | Prisma.Session$assetsArgs<ExtArgs>
   submissions?: boolean | Prisma.Session$submissionsArgs<ExtArgs>
   _count?: boolean | Prisma.SessionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["session"]>
@@ -1029,11 +1160,11 @@ export type SessionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   summary?: boolean
   goals?: boolean
   prerequisites?: boolean
-  location?: boolean
-  presenterId?: boolean
   published?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  presenterId?: boolean
+  location?: boolean
   presenter?: boolean | Prisma.Session$presenterArgs<ExtArgs>
 }, ExtArgs["result"]["session"]>
 
@@ -1044,11 +1175,11 @@ export type SessionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   summary?: boolean
   goals?: boolean
   prerequisites?: boolean
-  location?: boolean
-  presenterId?: boolean
   published?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  presenterId?: boolean
+  location?: boolean
   presenter?: boolean | Prisma.Session$presenterArgs<ExtArgs>
 }, ExtArgs["result"]["session"]>
 
@@ -1059,18 +1190,19 @@ export type SessionSelectScalar = {
   summary?: boolean
   goals?: boolean
   prerequisites?: boolean
-  location?: boolean
-  presenterId?: boolean
   published?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  presenterId?: boolean
+  location?: boolean
 }
 
-export type SessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "date" | "summary" | "goals" | "prerequisites" | "location" | "presenterId" | "published" | "createdAt" | "updatedAt", ExtArgs["result"]["session"]>
+export type SessionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "date" | "summary" | "goals" | "prerequisites" | "published" | "createdAt" | "updatedAt" | "presenterId" | "location", ExtArgs["result"]["session"]>
 export type SessionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  assets?: boolean | Prisma.Session$assetsArgs<ExtArgs>
+  attendances?: boolean | Prisma.Session$attendancesArgs<ExtArgs>
   presenter?: boolean | Prisma.Session$presenterArgs<ExtArgs>
   blocks?: boolean | Prisma.Session$blocksArgs<ExtArgs>
-  assets?: boolean | Prisma.Session$assetsArgs<ExtArgs>
   submissions?: boolean | Prisma.Session$submissionsArgs<ExtArgs>
   _count?: boolean | Prisma.SessionCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1084,9 +1216,10 @@ export type SessionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $SessionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Session"
   objects: {
+    assets: Prisma.$AssetPayload<ExtArgs>[]
+    attendances: Prisma.$AttendancePayload<ExtArgs>[]
     presenter: Prisma.$UserPayload<ExtArgs> | null
     blocks: Prisma.$SessionBlockPayload<ExtArgs>[]
-    assets: Prisma.$AssetPayload<ExtArgs>[]
     submissions: Prisma.$SubmissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1096,11 +1229,11 @@ export type $SessionPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     summary: string
     goals: string[]
     prerequisites: string[]
-    location: string | null
-    presenterId: string | null
     published: boolean
     createdAt: Date
     updatedAt: Date
+    presenterId: string | null
+    location: string | null
   }, ExtArgs["result"]["session"]>
   composites: {}
 }
@@ -1495,9 +1628,10 @@ readonly fields: SessionFieldRefs;
  */
 export interface Prisma__SessionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  assets<T extends Prisma.Session$assetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$assetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  attendances<T extends Prisma.Session$attendancesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$attendancesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   presenter<T extends Prisma.Session$presenterArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$presenterArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   blocks<T extends Prisma.Session$blocksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$blocksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionBlockPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  assets<T extends Prisma.Session$assetsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$assetsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AssetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   submissions<T extends Prisma.Session$submissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Session$submissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1534,11 +1668,11 @@ export interface SessionFieldRefs {
   readonly summary: Prisma.FieldRef<"Session", 'String'>
   readonly goals: Prisma.FieldRef<"Session", 'String[]'>
   readonly prerequisites: Prisma.FieldRef<"Session", 'String[]'>
-  readonly location: Prisma.FieldRef<"Session", 'String'>
-  readonly presenterId: Prisma.FieldRef<"Session", 'String'>
   readonly published: Prisma.FieldRef<"Session", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Session", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Session", 'DateTime'>
+  readonly presenterId: Prisma.FieldRef<"Session", 'String'>
+  readonly location: Prisma.FieldRef<"Session", 'String'>
 }
     
 
@@ -1935,6 +2069,54 @@ export type SessionDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
+ * Session.assets
+ */
+export type Session$assetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Asset
+   */
+  select?: Prisma.AssetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Asset
+   */
+  omit?: Prisma.AssetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AssetInclude<ExtArgs> | null
+  where?: Prisma.AssetWhereInput
+  orderBy?: Prisma.AssetOrderByWithRelationInput | Prisma.AssetOrderByWithRelationInput[]
+  cursor?: Prisma.AssetWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AssetScalarFieldEnum | Prisma.AssetScalarFieldEnum[]
+}
+
+/**
+ * Session.attendances
+ */
+export type Session$attendancesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Attendance
+   */
+  select?: Prisma.AttendanceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Attendance
+   */
+  omit?: Prisma.AttendanceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttendanceInclude<ExtArgs> | null
+  where?: Prisma.AttendanceWhereInput
+  orderBy?: Prisma.AttendanceOrderByWithRelationInput | Prisma.AttendanceOrderByWithRelationInput[]
+  cursor?: Prisma.AttendanceWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttendanceScalarFieldEnum | Prisma.AttendanceScalarFieldEnum[]
+}
+
+/**
  * Session.presenter
  */
 export type Session$presenterArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1975,30 +2157,6 @@ export type Session$blocksArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.SessionBlockScalarFieldEnum | Prisma.SessionBlockScalarFieldEnum[]
-}
-
-/**
- * Session.assets
- */
-export type Session$assetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Asset
-   */
-  select?: Prisma.AssetSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Asset
-   */
-  omit?: Prisma.AssetOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AssetInclude<ExtArgs> | null
-  where?: Prisma.AssetWhereInput
-  orderBy?: Prisma.AssetOrderByWithRelationInput | Prisma.AssetOrderByWithRelationInput[]
-  cursor?: Prisma.AssetWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AssetScalarFieldEnum | Prisma.AssetScalarFieldEnum[]
 }
 
 /**

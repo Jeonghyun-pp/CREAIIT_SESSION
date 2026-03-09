@@ -7,6 +7,104 @@ datasource db {
   provider = "postgresql"
 }
 
+model User {
+  id                String       @id @default(cuid())
+  email             String       @unique
+  name              String
+  passwordHash      String
+  createdAt         DateTime     @default(now())
+  role              Role         @default(MEMBER)
+  status            UserStatus   @default(PENDING)
+  attendances       Attendance[]
+  presentedSessions Session[]    @relation("SessionPresenter")
+  submissions       Submission[]
+}
+
+model Session {
+  id            String         @id @default(cuid())
+  title         String
+  date          DateTime
+  summary       String
+  goals         String[]
+  prerequisites String[]
+  published     Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  presenterId   String?
+  location      String?
+  assets        Asset[]
+  attendances   Attendance[]
+  presenter     User?          @relation("SessionPresenter", fields: [presenterId], references: [id])
+  blocks        SessionBlock[]
+  submissions   Submission[]
+}
+
+model SessionBlock {
+  id          String    @id @default(cuid())
+  sessionId   String
+  order       Int
+  type        BlockType
+  title       String
+  description String?
+  startTime   String?
+  endTime     String?
+  createdAt   DateTime  @default(now())
+  session     Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId, order])
+}
+
+model Asset {
+  id            String       @id @default(cuid())
+  sessionId     String
+  kind          AssetKind
+  title         String
+  description   String?
+  fileName      String
+  mimeType      String
+  size          Int
+  storageKey    String       @unique
+  downloadCount Int          @default(0)
+  createdAt     DateTime     @default(now())
+  session       Session      @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  submissions   Submission[] @relation("SubmissionFile")
+}
+
+model Attendance {
+  id        String           @id @default(cuid())
+  sessionId String
+  userId    String
+  status    AttendanceStatus @default(ABSENT)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  session   Session          @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, userId])
+}
+
+model Submission {
+  id             String           @id @default(cuid())
+  sessionId      String
+  submitterName  String?
+  submitterEmail String?
+  githubUrl      String?
+  fileAssetId    String?
+  message        String?
+  ipHash         String
+  status         SubmissionStatus @default(SUBMITTED)
+  createdAt      DateTime         @default(now())
+  userId         String?
+  feedback       String?
+  fileAsset      Asset?           @relation("SubmissionFile", fields: [fileAssetId], references: [id])
+  session        Session          @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user           User?            @relation(fields: [userId], references: [id])
+
+  @@index([sessionId, createdAt])
+  @@index([ipHash, sessionId])
+  @@index([userId])
+}
+
 enum Role {
   ADMIN
   MEMBER
@@ -18,56 +116,9 @@ enum UserStatus {
   REJECTED
 }
 
-model User {
-  id           String     @id @default(cuid())
-  email        String     @unique
-  name         String
-  passwordHash String
-  role         Role       @default(MEMBER)
-  status       UserStatus @default(PENDING)
-  createdAt    DateTime   @default(now())
-
-  submissions       Submission[]
-  presentedSessions Session[]    @relation("SessionPresenter")
-}
-
-model Session {
-  id            String         @id @default(cuid())
-  title         String
-  date          DateTime
-  summary       String
-  goals         String[]
-  prerequisites String[]
-  location      String?
-  presenterId   String?
-  presenter     User?          @relation("SessionPresenter", fields: [presenterId], references: [id])
-  published     Boolean        @default(false)
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-
-  blocks      SessionBlock[]
-  assets      Asset[]
-  submissions Submission[]
-}
-
 enum BlockType {
   FLOW
   TIMELINE
-}
-
-model SessionBlock {
-  id          String    @id @default(cuid())
-  sessionId   String
-  session     Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  order       Int
-  type        BlockType
-  title       String
-  description String?
-  startTime   String?
-  endTime     String?
-  createdAt   DateTime  @default(now())
-
-  @@index([sessionId, order])
 }
 
 enum AssetKind {
@@ -77,45 +128,13 @@ enum AssetKind {
   ETC
 }
 
-model Asset {
-  id            String    @id @default(cuid())
-  sessionId     String
-  session       Session   @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  kind          AssetKind
-  title         String
-  description   String?
-  fileName      String
-  mimeType      String
-  size          Int
-  storageKey    String    @unique
-  downloadCount Int       @default(0)
-  createdAt     DateTime  @default(now())
-
-  submissions Submission[] @relation("SubmissionFile")
-}
-
 enum SubmissionStatus {
   SUBMITTED
   REVIEWED
 }
 
-model Submission {
-  id             String           @id @default(cuid())
-  sessionId      String
-  session        Session          @relation(fields: [sessionId], references: [id], onDelete: Cascade)
-  userId         String?
-  user           User?            @relation(fields: [userId], references: [id])
-  submitterName  String?
-  submitterEmail String?
-  githubUrl      String?
-  fileAssetId    String?
-  fileAsset      Asset?           @relation("SubmissionFile", fields: [fileAssetId], references: [id])
-  message        String?
-  ipHash         String
-  status         SubmissionStatus @default(SUBMITTED)
-  createdAt      DateTime         @default(now())
-
-  @@index([sessionId, createdAt])
-  @@index([ipHash, sessionId])
-  @@index([userId])
+enum AttendanceStatus {
+  PRESENT
+  LATE
+  ABSENT
 }

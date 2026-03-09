@@ -6,6 +6,7 @@ import { SectionLearn } from "@/components/session/SectionLearn";
 import { SectionSchedule } from "@/components/session/SectionSchedule";
 import { SectionAssets } from "@/components/session/SectionAssets";
 import { SectionSubmit } from "@/components/session/SectionSubmit";
+import { SectionAttendance } from "@/components/session/SectionAttendance";
 import Link from "next/link";
 
 interface Props {
@@ -73,6 +74,8 @@ export default async function SessionDetailPage({ params }: Props) {
         <SectionSchedule blocks={session.blocks} />
 
         <SectionAssets assets={session.assets} />
+
+        <SectionAttendance sessionId={session.id} />
 
         <SectionSubmit sessionId={session.id} />
       </div>

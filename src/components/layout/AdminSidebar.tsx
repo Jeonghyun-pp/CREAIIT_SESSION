@@ -8,6 +8,7 @@ const navItems = [
   { href: "/admin/sessions", label: "세션 관리", icon: "📋" },
   { href: "/admin/assets", label: "자료 관리", icon: "📁" },
   { href: "/admin/submissions", label: "제출물", icon: "📨" },
+  { href: "/admin/attendance", label: "출석 관리", icon: "✅" },
   { href: "/admin/members", label: "회원 관리", icon: "👥" },
 ];
 

@@ -60,6 +60,11 @@ export type SessionBlock = Prisma.SessionBlockModel
  */
 export type Asset = Prisma.AssetModel
 /**
+ * Model Attendance
+ * 
+ */
+export type Attendance = Prisma.AttendanceModel
+/**
  * Model Submission
  * 
  */
